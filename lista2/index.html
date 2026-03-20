@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Exercicios 2</title>
+</head>
+<body>
+    <main>
+        <h1>Analise do Vetor de Idades</h1>
+        <p>Vetor utilizado: <span id="vetor-idades"></span></p>
+        <p>a) Soma das idades: <span id="soma-idades"></span></p>
+        <p>b) Media aritmetica: <span id="media-idades"></span></p>
+        <p>c) Maior idade: <span id="maior-idade"></span></p>
+        <p>d) Idades impares: <span id="idades-impares"></span></p>
+        <p>e) Maiores de idade: <span id="maiores-idade"></span></p>
+
+        <section>
+            <h2>Comparacao</h2>
+            <form id="form-comparacao">
+                <label for="valorComparacao">Digite uma idade para comparar:</label>
+                <input type="number" id="valorComparacao" min="0" required>
+                <button type="submit">Calcular</button>
+            </form>
+            <p>f) Todas as idades sao maiores ou iguais a <span id="valor-f">-</span>? <span id="resultado-f"></span></p>
+            <p>g) Idades maiores ou iguais a <span id="valor-g">-</span>: <span id="resultado-g"></span></p>
+            <p>h) Media das idades maiores ou iguais a <span id="valor-h">-</span>: <span id="resultado-h"></span></p>
+        </section>
+    </main>
+
+    <script>
+        const vetorIdades = [10, 21, 31, 40];
+
+        const somaIdades = (idades) => idades.reduce((acumulador, idade) => acumulador + idade, 0);
+        const mediaIdades = (idades) => somaIdades(idades) / idades.length;
+        const maiorIdade = (idades) => Math.max(...idades);
+        const idadesImpares = (idades) => idades.filter((idade) => idade % 2 !== 0);
+        const maioresDeIdade = (idades) => idades.filter((idade) => idade >= 18);
+        const todasMaioresOuIguais = (idades, valor) => idades.every((idade) => idade >= valor);
+        const filtrarMaioresOuIguais = (idades, valor) => idades.filter((idade) => idade >= valor);
+
+        const mediaFiltrada = (idades, valor) => {
+            const filtradas = filtrarMaioresOuIguais(idades, valor);
+
+            if (filtradas.length === 0) {
+                return "Nenhuma idade encontrada";
+            }
+
+            return (somaIdades(filtradas) / filtradas.length).toFixed(2);
+        };
+
+        document.getElementById("vetor-idades").textContent = vetorIdades.join(", ");
+        document.getElementById("soma-idades").textContent = somaIdades(vetorIdades);
+        document.getElementById("media-idades").textContent = mediaIdades(vetorIdades).toFixed(2);
+        document.getElementById("maior-idade").textContent = maiorIdade(vetorIdades);
+        document.getElementById("idades-impares").textContent = idadesImpares(vetorIdades).join(", ");
+        document.getElementById("maiores-idade").textContent = maioresDeIdade(vetorIdades).join(", ");
+
+        document.getElementById("form-comparacao").addEventListener("submit", (evento) => {
+            evento.preventDefault();
+
+            const valor = Number(document.getElementById("valorComparacao").value);
+            const filtradas = filtrarMaioresOuIguais(vetorIdades, valor);
+
+            document.getElementById("valor-f").textContent = valor;
+            document.getElementById("valor-g").textContent = valor;
+            document.getElementById("valor-h").textContent = valor;
+
+            document.getElementById("resultado-f").textContent = todasMaioresOuIguais(vetorIdades, valor) ? "Sim" : "Nao";
+            document.getElementById("resultado-g").textContent = filtradas.length > 0 ? filtradas.join(", ") : "Nenhuma idade encontrada";
+            document.getElementById("resultado-h").textContent = mediaFiltrada(vetorIdades, valor);
+        });
+    </script>
+</body>
+</html>
