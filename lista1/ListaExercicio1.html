@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+</head>
+<body>
+<p>Soma das idades = <span id="soma"></span></p>
+<p>Media das idades = <span id="media"></span></p>
+<p>Maior idade = <span id="maior"></span></p>
+<p>Idades impares = <span id="impares"></span></p>
+<p>Todos sao maiores de idade? = <span id="maiores"></span></p>
+<p>Todas idades >= <span id="valor"></span>? = <span id="comparacao"></span></p>
+<p>Idades >= <span id="valor-2"></span> = <span id="filtradas"></span></p>
+<p>Media das idades >= <span id="valor-3"></span> = <span id="media-filtradas"></span></p>
+
+<script>
+// soma das idades
+sumAges = (vet) => {
+    sum = 0;
+    for (i = 0; i < vet.length; i++) sum += vet[i];
+    return sum;
+}
+
+// média das idades
+avgAges = (vet) => sumAges(vet) / vet.length;
+
+// maior idade
+maxAge = (vet) => {
+    maior = vet[0];
+    for (i = 1; i < vet.length; i++) {
+        if (vet[i] > maior) maior = vet[i];
+    }
+    return maior;
+}
+
+// idades ímpares
+oddAges = (vet) => vet.filter(n => n % 2 != 0);
+
+// verificar se todos são maiores de idade
+allAdults = (vet) => vet.every(n => n >= 18);
+
+// verificar se todos são maiores que valor informado
+allGreaterThan = (vet, valor) => vet.every(n => n >= valor);
+
+// idades maiores que valor informado
+greaterThan = (vet, valor) => vet.filter(n => n >= valor);
+
+// média das idades maiores que valor informado
+avgGreaterThan = (vet, valor) => {
+    maiores = vet.filter(n => n >= valor);
+    return sumAges(maiores) / maiores.length;
+}
+
+// vetor inicial
+vetAges = [10, 21, 31, 40];
+
+// valor informado pelo usuário
+valor = parseInt(prompt("Informe uma idade para comparação"));
+
+document.getElementById("soma").textContent = sumAges(vetAges);
+document.getElementById("media").textContent = avgAges(vetAges);
+document.getElementById("maior").textContent = maxAge(vetAges);
+document.getElementById("impares").textContent = oddAges(vetAges);
+document.getElementById("maiores").textContent = allAdults(vetAges);
+document.getElementById("valor").textContent = valor;
+document.getElementById("valor-2").textContent = valor;
+document.getElementById("valor-3").textContent = valor;
+document.getElementById("comparacao").textContent = allGreaterThan(vetAges, valor);
+document.getElementById("filtradas").textContent = greaterThan(vetAges, valor);
+document.getElementById("media-filtradas").textContent = avgGreaterThan(vetAges, valor);
+</script>
+</body>
+</html>
