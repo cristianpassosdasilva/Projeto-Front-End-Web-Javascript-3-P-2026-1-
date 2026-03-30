@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Top 10 Filmes Populares | TMDB</title>
+    <link rel="preconnect" href="https://image.tmdb.org" crossorigin />
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <header class="cabecalho">
+      <div class="cabecalho__conteudo">
+        <span class="marca">CineFlix</span>
+        <h1>Top 10 Filmes Mais Populares</h1>
+      </div>
+    </header>
+
+    <main class="conteudo">
+      <section class="barra-filtros" aria-label="Filtros de busca">
+        <label for="genreSelect">Buscar por gênero:</label>
+        <select id="genreSelect" class="select-genero">
+          <option value="">Todos os gêneros (Top populares)</option>
+        </select>
+      </section>
+
+      <div id="statusMessage" class="mensagem-status" role="status" aria-live="polite">
+        Carregando filmes...
+      </div>
+
+      <section id="moviesGrid" class="grade-filmes" aria-label="Lista de filmes populares"></section>
+    </main>
+
+    <script src="./js/script.js" defer></script>
+  </body>
+</html>

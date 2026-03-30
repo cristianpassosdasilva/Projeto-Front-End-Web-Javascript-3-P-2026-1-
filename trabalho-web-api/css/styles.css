@@ -1,0 +1,221 @@
+:root {
+  --texto: #f5f7ff;
+  --texto-suave: #b7bfd3;
+  --fundo: #0f1424;
+  --fundo-card: #1a2238;
+  --borda: #2e3650;
+  --destaque: #ff6767;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--texto);
+  background: var(--fundo);
+}
+
+/* Cabeçalho principal da página */
+.cabecalho {
+  position: relative;
+  padding: 2rem 1rem;
+  background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url("https://images.unsplash.com/photo-1489599735734-79b4eea47d28?auto=format&fit=crop&w=1600&q=80") center / cover no-repeat;
+}
+
+/* Área de conteúdo dentro do cabeçalho */
+.cabecalho__conteudo {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Selo de marca no topo */
+.marca {
+  display: inline-block;
+  margin-bottom: 0.7rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--destaque);
+}
+
+/* Título principal do cabeçalho */
+.cabecalho h1 {
+  margin-bottom: 0.6rem;
+  font-size: clamp(1.5rem, 4vw, 2.3rem);
+}
+
+/* Bloco principal de conteúdo da página */
+.conteudo {
+  width: min(1200px, 94%);
+  margin: 1.5rem auto 2rem;
+}
+
+/* Linha com filtros de busca */
+.barra-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+/* Campo select para escolher gênero */
+.select-genero {
+  min-width: 220px;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  color: var(--texto);
+  background: #141b2f;
+}
+
+/* Mensagem de status geral */
+.mensagem-status {
+  margin-bottom: 1rem;
+  color: var(--texto-suave);
+}
+
+/* Cor da mensagem quando houver erro */
+.mensagem-status--erro {
+  color: #ff9b9b;
+}
+
+/* Cor da mensagem quando der certo */
+.mensagem-status--sucesso {
+  color: #92e0aa;
+}
+
+/* Grade onde os cards de filmes são exibidos */
+.grade-filmes {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@media (max-width: 1200px) {
+  .grade-filmes {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 920px) {
+  .grade-filmes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Card individual de cada filme */
+.cartao-filme {
+  background-color: transparent;
+  aspect-ratio: 2 / 3;
+  perspective: 1000px;
+}
+
+/*
+  ===== INICIO: FLIP (PADRAO W3SCHOOLS) =====
+  Baseado em: https://www.w3schools.com/howto/howto_css_flip_box.asp
+*/
+
+/* Caixa interna que gira */
+.cartao-filme__flip {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* Gatilho do flip no hover */
+.cartao-filme:hover .cartao-filme__flip {
+  transform: rotateY(180deg);
+}
+
+/* Faces da frente e do verso */
+.cartao-filme__frente,
+.cartao-filme__verso {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Frente do card */
+.cartao-filme__frente {
+  background: var(--fundo-card);
+}
+
+/* Verso do card */
+.cartao-filme__verso {
+  background: var(--fundo-card);
+  transform: rotateY(180deg);
+  padding: 0.8rem;
+  text-align: left;
+}
+
+/* ===== FIM: FLIP (PADRAO W3SCHOOLS) ===== */
+
+/* Imagem do filme na frente do card */
+.cartao-filme__frente > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Selo de nota do filme */
+.nota-filme {
+  display: inline-block;
+  margin-top: 0.25rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(255, 103, 103, 0.2);
+  color: #ffc3c3;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* Sinopse com altura limitada */
+.sinopse {
+  max-height: none;
+  overflow: visible;
+}
+
+/* Título no verso do card */
+.cartao-filme__verso h3 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Textos no verso do card */
+.cartao-filme__verso p {
+  margin-bottom: 0.35rem;
+  color: var(--texto-suave);
+  font-size: 0.9rem;
+}
+
+@media (hover: none) {
+  .cartao-filme:hover .cartao-filme__flip {
+    transform: none;
+  }
+}
+
+@media (max-width: 600px) {
+  /* Ajuste da grade para telas pequenas */
+  .grade-filmes {
+    grid-template-columns: 1fr;
+  }
+}
